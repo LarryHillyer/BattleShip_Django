@@ -8,22 +8,37 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" >
 </head>
 <body>
-
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class = "heading">BattleShip 1</h1>
-                <form action="{% url 'battleship:index' %}" method="POST">
-                    {% csrf_token %}
-                    <input type="text" id="user-guess" name="user-guess">
-                    <input type="submit" value="Fire">
-                </form>
+                <h1 class="heading">BattleShip 1</h1>
+                <div class="col-sm-3">
+
+                        <div class="btn-group-vertical" role="group" aria-label="...">
+                            <button type="button" onclick="createShips(1,3)" class="btn btn-default">Create Ships</button>
+                            <button type="button" onclick="createGrid()" class="btn btn-default">Create Grid</button>
+                            <button type="button" onclick="hideShip(shipYard[0], grid)" class="btn btn-default">Hide Ships</button>
+                        </div>
+                    
+                </div>
+
+                <div class="col-sm-6">
+                    <form action="{% url 'battleship:index' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" id="user-guess" name="user-guess" class="form-control" placeholder="Grid Location">
+                            <span class="input-group-btn">
+                            <input type="submit" class="btn btn-default" value="Fire">   
+                            </span>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" ></script>
     <script src="{% static 'js/app.js' %}"></script>
 </body>
 </html>

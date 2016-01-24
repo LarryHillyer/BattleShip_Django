@@ -1,5 +1,4 @@
 
-
 function Ship(size) {  
   this.hits=0;
   this.size = size;
@@ -17,19 +16,23 @@ function createShips(totalShips, shipSize) {
   for (var i = 0; i < totalShips; i++) {
     ships.push(new Ship(shipSize));
   }
-  return ships;
+  localStorage['shipYard'] = JSON.stringify(ships);
+  shipYard = JSON.parse(localStorage['shipYard']);
+
 }
 
-function createGrid(rows) {
-  var grid = {};
+function createGrid() {
+  var grid1 = {};
   for (var i = 0; i < rows.length; i++) {
     var row = rows[i];
-    grid[row] = [];
+    grid1[row] = [];
     for (var col = 0; col < rows.length; col++) {
-      grid[row][col] = {name: row + col};
+      grid1[row][col] = {name: row + col};
     }
   }
-  return grid;
+  localStorage['grid']=JSON.stringify(grid1);
+  grid = JSON.parse(localStorage['grid']);
+
 }
 
 function fireMissile() {
@@ -118,10 +121,10 @@ function checkShipPosition(ship,direction, rowIndex, colIndex) {
     }
 }
 
-function hideShip(ship, grid){
+function hideShip(ship){
   ship['isHit']=false;
   var ifValid = false;
-
+  //grid = JSON.parse(localStorage['grid']);
   while (!ifValid) {
     var direction = Math.round(Math.random());
     var rowIndex = Math.floor(Math.random()*rows.length);
@@ -138,7 +141,9 @@ function hideShip(ship, grid){
             }
         }
     }      
-  }  
+  }
+  localStorage['grid']=JSON.stringify(grid);
+  grid = JSON.parse(localStorage['grid']);    
 }
  
 // function alert1(messege1) {
@@ -146,11 +151,12 @@ function hideShip(ship, grid){
 // }
 
 var player1 = new Player("Sam","novice", "", [], 0);
-
 var rows = ["A","B","C","D","E","F","G","H","I","J"];
-var grid =  createGrid(rows);
-// var shipYard = createShips(2,2);
-
+var shipYard;
+var grid;
 var missilesFired = 0;
-var battleShip = new Ship(3);
-hideShip(battleShip, grid);
+ 
+//createGrid();
+//var shipYard = createShips(2,2);
+//var battleShip = new Ship(3);
+//hideShip(shipYard[0], grid);
